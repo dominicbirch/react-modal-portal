@@ -12,7 +12,7 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: true
-
+  
 jobs:
   pages:
     runs-on: ubuntu-latest
@@ -25,9 +25,10 @@ jobs:
           node-version: 16
           cache: npm
       - run: npm ci
-      - run: npx parcel build examples/ --no-source-maps --dist-dir .bin
-      - uses: actions/configure-pages@v2
-      - uses: actions/upload-pages-artifact@v1
+      - run: npx parcel build examples/ --dist-dir .bin
+      - uses: actions/configure-pages@v2.1.1
+      - uses: actions/upload-pages-artifact@v1.0.4
         with:
           path: .bin/
-      - uses: actions/deploy-pages@v1
+          retention-days: 7
+      - uses: actions/deploy-pages@v1.2.2
