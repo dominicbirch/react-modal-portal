@@ -2,6 +2,7 @@ import type {DefaultTheme} from 'styled-components';
 
 export const defaultTheme: DefaultTheme = {
 	modal: {
+		mediaBreakpoint: 768,
 		whitespace: '.5rem',
 		borderRadius: '.5rem',
 		fontWeight: 400,

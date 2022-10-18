@@ -1,5 +1,5 @@
 import type {ReactNode} from 'react';
-import {useState, useCallback, useMemo} from 'react';
+import {useState, useCallback, useMemo, useEffect} from 'react';
 import type {ToggleProps} from './toggle';
 import type {ModalProps} from './modal';
 
@@ -36,4 +36,37 @@ export function useToggle({hideLabel, label, onClose}: Partial<ToggleProps & Pic
 		toggle,
 		handleClose,
 	};
+}
+
+export function useModalContainer(target?: Element | string) {
+	return useMemo(() => {
+		if (target instanceof Element) {
+			return target;
+		}
+
+		if (typeof target === 'string') {
+			const c = document.querySelector(target);
+			if (c) {
+				return c;
+			}
+		}
+
+		return document.body;
+	}, [target]);
+}
+
+export function useBodyScrollLock(lock: boolean | undefined, disable = false) {
+	useEffect(() => {
+		if (disable) {
+			return;
+		}
+
+		// Hide scrollbar for background content while open, prevent scrolling body
+		document.body.style.overflow = lock ? 'hidden' : 'auto';
+
+		// Reset body scrolling when removed
+		return () => {
+			document.body.style.overflow = 'auto';
+		};
+	}, [lock, disable]);
 }

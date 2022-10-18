@@ -1,5 +1,8 @@
+import type {ComponentType} from 'react';
+import type {StyledComponent, DefaultTheme} from 'styled-components';
 import styled, {keyframes} from 'styled-components';
 import {defaultTheme} from './defaultTheme';
+import type {ModalProps} from './modal';
 import {Modal} from './modal';
 
 const fadeIn = keyframes`
@@ -13,7 +16,7 @@ const fadeIn = keyframes`
 `;
 
 /** Renders child content in a modal popup container which applies its own styles */
-const StyledModal = styled(Modal)`
+const styledModal: StyledComponent<ComponentType<ModalProps>, DefaultTheme, ModalProps> = styled(Modal)`
     font-weight: ${({theme}) => theme.modal.fontWeight};
 
     .backdrop {
@@ -67,7 +70,7 @@ const StyledModal = styled(Modal)`
         padding: ${({theme}) => theme.modal.whitespace};
     }
 
-    @media (max-width: 768px){
+    @media (max-width: ${({theme}) => theme.modal.mediaBreakpoint}px){
         .window{
             left: ${({theme}) => theme.modal.whitespace};
             transform: translateY(-50%);
@@ -75,11 +78,11 @@ const StyledModal = styled(Modal)`
     }
 `;
 
-StyledModal.displayName = 'StyledModal';
-StyledModal.defaultProps = {
+styledModal.displayName = 'StyledModal';
+styledModal.defaultProps = {
 	theme: defaultTheme,
 };
 
 export {
-	StyledModal,
+	styledModal as StyledModal,
 };

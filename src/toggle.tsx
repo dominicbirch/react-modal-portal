@@ -66,7 +66,7 @@ export function withToggle<C extends ModalLike>(ModalComponent: C) {
 				label={actionLabel}
 				value={value}
 				toggle={toggle} />
-			<ModalComponent {...props as any} open={value} onClose={handleClose} />
+			{value && <ModalComponent {...props as any} onClose={handleClose} />}
 		</>;
 	};
 

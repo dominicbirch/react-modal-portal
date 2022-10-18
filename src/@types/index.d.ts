@@ -5,6 +5,8 @@ declare module 'styled-components' {
 	/* eslint-disable @typescript-eslint/consistent-type-definitions */
 	interface DefaultTheme {
 		modal: {
+			/** This is the number of available pixels in width at which the modal switches from using the middle 50% of the screen to using the whole screen (-whitespace) */
+			mediaBreakpoint: number;
 			whitespace: string;
 			borderRadius: string;
 			fontWeight: number;
