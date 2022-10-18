@@ -1,0 +1,9 @@
+{
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.test.ts",
+        "*.jsx": "${capture}.mdx,${capture}.scss",
+        "*.tsx": "${capture}.test.ts,${capture}.test.tsx,${capture}.test.js,${capture}.test.jsx",
+        ".eslintrc.js": ".eslintcache"
+    }
+}

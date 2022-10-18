@@ -1,0 +1,6 @@
+.parcel-cache
+.eslintcache
+.bin
+**/node_modules/
+dist/
+*.tgz

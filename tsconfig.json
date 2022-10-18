@@ -1,0 +1,31 @@
+{
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules",
+    ],
+    "compilerOptions": {
+        "rootDir": "./src",
+        "baseUrl": "./src",
+        "moduleResolution": "node",
+        "module": "ES6",
+        "target": "ES5",
+        "jsx": "react",
+        "pretty": false,
+        "strict": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "typeRoots": [
+            "src/@types"
+        ],
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ES2015",
+        ],
+    }
+}
