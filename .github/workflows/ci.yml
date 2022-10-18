@@ -16,15 +16,10 @@ jobs:
           node-version: 16
           cache: npm
       - run: npm ci
-      - run: npx parcel build examples/index.html --dist-dir .bin
+      - run: npx parcel build examples/ --no-source-maps --dist-dir .bin
       - uses: actions/configure-pages@v2.1.1
       - uses: actions/upload-pages-artifact@v1.0.4
         with:
           path: .bin/
           retention-days: 7
       - uses: actions/deploy-pages@v1.2.2
-        # with:
-          # Maximum number of status report errors before cancelling a deployment (default: 10)
-          # error_count: # optional, default is 10
-          # Name of the artifact to deploy
-          # artifact_name: # optional, default is github-pages

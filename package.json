@@ -4,7 +4,7 @@
   "description": "Customizable, optionally styled modal dialog component",
   "scripts": {
     "prepack": "rm -rf ./dist/ && parcel build --no-source-maps",
-    "serve": "parcel serve examples/index.html --dist-dir .bin --open",
+    "serve": "parcel serve examples/ --dist-dir .bin --open",
     "lint": "eslint . --fix --cache"
   },
   "pre-commit": "lint",
