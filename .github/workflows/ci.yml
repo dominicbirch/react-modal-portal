@@ -23,7 +23,7 @@ jobs:
           path: .bin/
           retention-days: 7
       - uses: actions/deploy-pages@v1.2.2
-        with:
+        # with:
           # Maximum number of status report errors before cancelling a deployment (default: 10)
           # error_count: # optional, default is 10
           # Name of the artifact to deploy
