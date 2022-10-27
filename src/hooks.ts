@@ -38,6 +38,12 @@ export function useToggle({hideLabel, label, onClose}: Partial<ToggleProps & Pic
 	};
 }
 
+/**
+ * Resolves and returns a cached reference to the target DOM element.
+ * @param target This can either be a query selector string or any ref to an element in the document.
+ *
+ * If no target is provided, the document's body is returned.
+ */
 export function useModalContainer(target?: Element | string) {
 	return useMemo(() => {
 		if (target instanceof Element) {
@@ -55,6 +61,11 @@ export function useModalContainer(target?: Element | string) {
 	}, [target]);
 }
 
+/**
+ * Prevents scrolling of the document's main content.
+ * @param lock `true` to prevent scrolling, `false` to allow it.
+ * @param disable `true` to ignore changes to the lock state.
+ */
 export function useBodyScrollLock(lock: boolean | undefined, disable = false) {
 	useEffect(() => {
 		if (disable) {

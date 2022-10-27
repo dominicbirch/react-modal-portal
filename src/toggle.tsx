@@ -1,8 +1,8 @@
 import {nanoid} from 'nanoid';
-import type {FunctionComponent} from 'react';
-import React, {useMemo} from 'react';
+import React from 'react';
 import {useToggle} from './hooks';
 import type {ModalProps} from './modal';
+import {componentName} from './util';
 
 export type ToggleKind = 'button' | 'link' | 'checkbox';
 /** The properties added by the ModalToggle HoC */
@@ -15,13 +15,11 @@ export type ToggleProps = {
 	hideLabel?: React.ReactNode;
 };
 /** Returns the type of properties for the function or class component type. */
-export type PropsOf<T> = T extends React.FunctionComponent<infer P>
+export type PropsOf<T> = T extends React.ComponentType<infer P>
 	? P
-	: T extends React.ComponentClass<infer P>
-		? P
-		: unknown;
+	: unknown;
 /** A function or class component with a toggle-compatible `onClose` callback. */
-export type ModalLike = React.FunctionComponent<Pick<ModalProps, 'onClose'>> | React.ComponentClass<Pick<ModalProps, 'onClose'>>;
+export type ModalLike = React.ComponentType<Pick<ModalProps, 'open' | 'onClose'>>;
 
 type InnerProps = {
 	kind: ToggleKind;
@@ -30,7 +28,7 @@ type InnerProps = {
 	toggle: () => void;
 };
 function ModalToggle({kind, label, value, toggle}: InnerProps) {
-	const id = useMemo(nanoid, []);
+	const id = React.useMemo(nanoid, []);
 
 	switch (kind) {
 		case 'link':
@@ -49,16 +47,16 @@ function ModalToggle({kind, label, value, toggle}: InnerProps) {
 }
 
 /** Creates a component which toggles display of a modal component.
- * @param ModalComponent The modal component to display when triggered.
+ * @param Component The modal component to display when triggered.
  * @returns The augmented modal component
  */
-export function withToggle<C extends ModalLike>(ModalComponent: C) {
-	const component: FunctionComponent<Omit<PropsOf<C>, 'open'> & ToggleProps> = ({kind = 'button', label, hideLabel, onClose, ...props}) => {
+export function toggled<C extends ModalLike>(Component: C) {
+	const component: React.ComponentType<PropsOf<C> & ToggleProps> = ({kind = 'button', label, hideLabel, open, onClose, ...props}) => {
 		const {value, actionLabel, toggle, handleClose} = useToggle({
 			label,
 			hideLabel,
 			onClose,
-		});
+		}, open ?? false);
 
 		return <>
 			<ModalToggle
@@ -66,13 +64,40 @@ export function withToggle<C extends ModalLike>(ModalComponent: C) {
 				label={actionLabel}
 				value={value}
 				toggle={toggle} />
-			{value && <ModalComponent {...props as any} onClose={handleClose} />}
+			{value && <Component {...props as any} onClose={handleClose} />}
 		</>;
 	};
 
-	return ModalComponent.displayName
-		? Object.defineProperty(component, 'displayName', {
-			value: `withToggle(${ModalComponent.displayName ?? 'Modal'})`,
-		})
-		: component;
+	component.displayName = `withToggle(${componentName(Component)})`;
+
+	return component;
+}
+
+/**
+ * Creates a Higher-Order Component which adds a toggle to a modal component.
+ * @returns The Higher-Order Component.
+ */
+export function withToggle({kind = 'button', label, hideLabel}: ToggleProps) {
+	return <C extends ModalLike>(Component: C) => {
+		const component: React.ComponentType<PropsOf<C>> = ({open, onClose, ...props}) => {
+			const {value, actionLabel, toggle, handleClose} = useToggle({
+				label,
+				hideLabel,
+				onClose,
+			}, open ?? false);
+
+			return <>
+				<ModalToggle
+					kind={kind}
+					label={actionLabel}
+					value={value}
+					toggle={toggle} />
+				{value && <Component {...props as any} onClose={handleClose} />}
+			</>;
+		};
+
+		component.displayName = `withToggle(${componentName(Component)})`;
+
+		return component;
+	};
 }

@@ -1,5 +1,5 @@
+import React from 'react';
 import {nanoid} from 'nanoid';
-import React, {useMemo} from 'react';
 import {createPortal} from 'react-dom';
 import {useBodyScrollLock, useModalContainer} from './hooks';
 
@@ -44,9 +44,9 @@ export type ModalProps = TitleProps & (PortalProps | InlineProps) & {
 };
 
 /** Renders child content in a modal popup container */
-function Modal({title, closeTitle, closeLabel, closeTabIndex, className, allowBodyScroll, open, inline, targetContainer, onClose, children}: React.PropsWithChildren<ModalProps>) {
+export function Modal({title, closeTitle, closeLabel, closeTabIndex, className, allowBodyScroll, open, inline, targetContainer, onClose, children}: React.PropsWithChildren<ModalProps>) {
 	const container = useModalContainer(targetContainer);
-	const id = useMemo(nanoid, []);
+	const id = React.useMemo(nanoid, []);
 
 	useBodyScrollLock(open, allowBodyScroll);
 
@@ -73,16 +73,10 @@ function Modal({title, closeTitle, closeLabel, closeTabIndex, className, allowBo
 	return inline ? node : createPortal(node, container);
 }
 
-(Modal as React.FunctionComponent<ModalProps>).displayName = 'Modal';
-(Modal as React.FunctionComponent<ModalProps>).defaultProps = {
+(Modal as React.ComponentType<ModalProps>).displayName = 'Modal';
+(Modal as React.ComponentType<ModalProps>).defaultProps = {
 	closeTitle: 'Close',
 	closeLabel: 'Close',
 	closeTabIndex: 99999,
 	open: true,
 };
-
-export {
-	Modal,
-};
-
-<Modal title='' closeLabel='' />;

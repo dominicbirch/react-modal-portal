@@ -1,3 +1,3 @@
-import { withToggle, StyledModal } from "../src";
+import { toggled, StyledModal } from "../src";
 
-export default withToggle(StyledModal);
+export default toggled(StyledModal);
