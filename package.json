@@ -1,6 +1,6 @@
 {
   "name": "react-modal-portal",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Customizable, optionally styled modal dialog component",
   "scripts": {
     "prepack": "rm -rf ./dist/ && parcel build --no-source-maps",
@@ -29,7 +29,12 @@
     "messagebox",
     "alert"
   ],
-  "author": "Dominic Birch",
+  "author": "Dominic Birch <dominicbirch@outlook.com> https://github.com/dominicbirch",
+  "homepage": "https://github.com/dominicbirch/react-modal-portal/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dominicbirch/react-modal-portal.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.19.3",

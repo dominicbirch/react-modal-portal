@@ -1,6 +1,8 @@
 # react-modal-portal
 ## Components
-The modal components are layout components which render their children into a modal container, either at a specific place in the DOM (portals) or in-place.  By default, modals are rendered to the end of the document's body.
+The modal components are layout components which render their children into a modal container, either at a specific place in the DOM (portals) or in-place.  
+
+By default, modals are rendered to the end of the document's body.
 
 ### Modal
 The naked component (with no styles applied) is exported as `Modal`.  The markup produced does apply some CSS classnames, and should render some markup similar to the following sample.
