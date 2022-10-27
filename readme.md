@@ -1,4 +1,8 @@
-# react-modal-portal
+# react-modal-portal 
+![NPM version](https://badge.fury.io/js/react-modal-portal.svg) 
+[![Release](https://github.com/dominicbirch/react-modal-portal/actions/workflows/release.yml/badge.svg?event=release)](https://github.com/dominicbirch/react-modal-portal/actions/workflows/release.yml) 
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+
 ## Components
 The modal components are layout components which render their children into a modal container, either at a specific place in the DOM (portals) or in-place.  
 
