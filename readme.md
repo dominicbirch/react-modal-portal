@@ -55,7 +55,7 @@ import React from "react";
 import StyledModal, { defaultTheme } from "react-modal-portal";
 
 export default () => 
-    <StyledModal theme={{...defaultTheme, whitespace: 0}}>
+    <StyledModal theme={{modal: { ...defaultTheme.modal, whitespace: 0 }}}>
         {/* your child content here */}
     </StyledModal>;
 ```
